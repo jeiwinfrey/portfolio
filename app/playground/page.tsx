@@ -1,9 +1,9 @@
 import NavBar from "@/components/navbar";
 
-export default function Page() {
+export default function PlaygroundPage() {
   return (
-    <div className="max-w-xl">
+    <div>
       <NavBar />
     </div>
-  );
+  )
 }
