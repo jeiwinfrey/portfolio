@@ -17,7 +17,7 @@ export default function Navbar() {
   const active = pathname === "/playground" ? "/playground" : "/";
 
   return (
-    <nav className="fixed top-0 inset-x-0 z-40 px-6 py-4">
+    <nav className="top-0 inset-x-0 z-40 pt-4">
       <div className="mx-auto flex max-w-xl items-center justify-between">
         <div className="size-8 bg-muted/90 rounded-full" />
 
