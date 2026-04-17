@@ -10,6 +10,10 @@ export default function Stack() {
         </div>
 
         <p className="text-pretty">
+          Languages: TypeScript, JavaScript, HTML, CSS.
+        </p>
+
+        <p className="text-pretty">
           Frontend: React, Next.js, Tailwind CSS, shadcn/ui, Motion.
         </p>
 
