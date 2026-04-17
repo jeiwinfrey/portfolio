@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@central-icons-react/round-filled-radius-3-stroke-1.5':
+        specifier: ^1.1.198
+        version: 1.1.198(react@19.2.5)
       class-variance-authority:
         specifier: ^0.7.1
         version: 0.7.1
@@ -216,6 +219,11 @@ packages:
   '@babel/types@7.29.0':
     resolution: {integrity: sha512-LwdZHpScM4Qz8Xw2iKSzS+cfglZzJGvofQICy7W7v4caru4EaAmyUuO6BGrbyQ2mYV11W0U8j5mBhd14dd3B0A==}
     engines: {node: '>=6.9.0'}
+
+  '@central-icons-react/round-filled-radius-3-stroke-1.5@1.1.198':
+    resolution: {integrity: sha512-7ZFq0yS6Pq6Oy5Dofh2mwbH1rMOffKhzmjre6uyQ/8s9R/TGNJveI6Tdq+paSv0Fd9lRx+xA5b/Q3QBeU/j/8A==}
+    peerDependencies:
+      react: '>=14.0.0 <= 19'
 
   '@dotenvx/dotenvx@1.61.0':
     resolution: {integrity: sha512-utL3cpZoFzflyqUkjYbxYujI6STBTmO5LFn4bbin/NZnRWN6wQ7eErhr3/Vpa5h/jicPFC6kTa42r940mQftJQ==}
@@ -4025,6 +4033,10 @@ snapshots:
     dependencies:
       '@babel/helper-string-parser': 7.27.1
       '@babel/helper-validator-identifier': 7.28.5
+
+  '@central-icons-react/round-filled-radius-3-stroke-1.5@1.1.198(react@19.2.5)':
+    dependencies:
+      react: 19.2.5
 
   '@dotenvx/dotenvx@1.61.0':
     dependencies:
