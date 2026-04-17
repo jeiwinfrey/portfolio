@@ -4,7 +4,7 @@ import { useState } from "react"
 import type { MouseEvent } from "react"
 import { motion, useMotionValue } from "motion/react"
 import { workRowTransition } from "@/lib/animations"
-import Tooltip from "@/components/tooltip"
+import Tooltip from "@/components/ui/tooltip"
 
 const educationItems = [
   {
