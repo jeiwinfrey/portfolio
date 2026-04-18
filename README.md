@@ -1,21 +1,26 @@
-# Next.js template
+# Jeiwinfrey Portfolio
 
-This is a Next.js template with shadcn/ui.
+A personal portfolio built with Next.js, Motion, Tailwind CSS, and shadcn/ui.
 
-## Adding components
+## Live Site
 
-To add components to your app, run the following command:
+[jeiwinfrey.com](https://jeiwinfrey.com)
 
-```bash
-npx shadcn@latest add button
-```
+## Preview
 
-This will place the ui components in the `components` directory.
+![Portfolio preview](./public/portfolio-preview.png)
 
-## Using components
+## Stack
 
-To use the components in your app, import them as follows:
+- Next.js
+- React
+- Motion
+- Tailwind CSS
+- shadcn/ui
 
-```tsx
-import { Button } from "@/components/ui/button";
-```
+## Focus
+
+- Motion-first UI
+- Frontend development
+- Design implementation
+- Personal projects and OJT work
