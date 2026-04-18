@@ -82,7 +82,7 @@ export function ViewportShell({ children }: { children: React.ReactNode }) {
   const { drawerProgress } = useViewportShell()
   const scale = useTransform(drawerProgress, [0, 1], [1, 0.965])
   const y = useTransform(drawerProgress, [0, 1], [0, -12])
-  const borderRadius = useTransform(drawerProgress, [0, 1], ["0px", "2.25rem"])
+  const borderRadius = useTransform(drawerProgress, [0, 1], ["0px", "1rem"])
 
   return (
     <motion.div
