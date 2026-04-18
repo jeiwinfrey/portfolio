@@ -2,10 +2,6 @@
 
 This is a Next.js template with shadcn/ui.
 
-## Live Site
-
-The live site is [jeiwinfrey.com](https://jeiwinfrey.com).
-
 ## Adding components
 
 To add components to your app, run the following command:
