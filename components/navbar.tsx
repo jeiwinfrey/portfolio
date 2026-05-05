@@ -6,14 +6,14 @@ import { springTransition, reducedMotionTransition } from "@/lib/animations";
 
 const tabs = [
   { label: "Home", href: "/" },
-  { label: "Playground", href: "/playground" },
+  { label: "Gallery", href: "/gallery" },
 ];
 
 export default function Navbar() {
   const pathname = usePathname();
   const router = useRouter();
 
-  const active = pathname === "/playground" ? "/playground" : "/";
+  const active = pathname === "/gallery" ? "/gallery" : "/";
   const reduceMotion = useReducedMotion();
 
   return (
