@@ -10,7 +10,7 @@ export default function Stack() {
         </div>
 
         <p className="text-pretty">
-          Languages: TypeScript, JavaScript, HTML, CSS.
+          Languages: TypeScript, JavaScript, HTML, CSS, Python.
         </p>
 
         <p className="text-pretty">
