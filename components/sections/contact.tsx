@@ -55,7 +55,7 @@ const contactItems: ContactItem[] = [
   {
     id: "x",
     label: "X",
-    href: "https://x.com/jwinpacis",
+    href: "https://x.com/jeiwinfreyu",
     external: true,
     icon: IconX,
   },

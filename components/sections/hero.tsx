@@ -34,7 +34,7 @@ export default function Hero() {
           snippets on{" "}
           <IconWordBurst
             icon={IconX}
-            href="https://x.com/jwinpacis"
+            href="https://x.com/jeiwinfreyu"
             ariaLabel="Open X profile"
             iconClassName="translate-y-[0.14em]"
           >
