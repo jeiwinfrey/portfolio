@@ -3,7 +3,7 @@
 import Link from "next/link"
 import { useState } from "react"
 import { AnimatePresence, motion } from "motion/react"
-import { springTransition } from "@/lib/animations"
+import { workRowTransition } from "@/lib/animations"
 import { works, workAssetBaseUrl, type WorkItem } from "@/lib/works"
 
 function WorkRow({
@@ -19,9 +19,10 @@ function WorkRow({
 }) {
   return (
     <motion.div
-      className="border-b border-border/50 py-4 last:border-b-0"
-      whileHover={{ x: 8 }}
-      transition={springTransition}
+      className="rounded-2xl px-9 py-2 transition-colors hover:bg-muted/90"
+      whileHover={{ x: 15, scale: 1.02 }}
+      whileTap={{ scale: 0.985 }}
+      transition={workRowTransition}
       onHoverStart={() => onHoverStart(item)}
       onHoverEnd={onHoverEnd}
       onPointerMove={onPointerMove}
