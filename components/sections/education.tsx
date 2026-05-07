@@ -17,7 +17,7 @@ const educationItems = [
   },
   {
     school: "Ilocos Norte National High School",
-    program: "Science, Technology, Engineering, and Mathematics Strand",
+    program: "Science, Technology, Engineering, and Mathematics Strand (STEM)",
     period: "2021 - 2023",
     details: ["With High Honors"],
     memory:
@@ -25,7 +25,7 @@ const educationItems = [
   },
   {
     school: "Ilocos Norte National High School",
-    program: "Special Science Class",
+    program: "Special Science Class (SSC)",
     period: "2017 - 2021",
     details: ["With Honors"],
     memory: "📝 Writing my first HTML and CSS code in Notepad💻.",
