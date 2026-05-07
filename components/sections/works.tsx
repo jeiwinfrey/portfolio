@@ -1,119 +1,57 @@
 "use client"
 
-import { motion } from "motion/react"
-import type { WorkItem } from "@/components/work-drawer"
-import { workRowTransition } from "@/lib/animations"
-
-type WorkSection = {
-  label: string
-  items: WorkItem[]
-}
-
-const workSections: WorkSection[] = [
-  {
-    label: "Products",
-    items: [
-      {
-        name: "Widgetly",
-        description:
-          "A simple, visual link-in-bio page for sharing links, projects, and socials in one place.",
-        techStack: ["Next.js", "Tailwind CSS", "Supabase", "motion"],
-      },
-      {
-        name: "Klaude Studio",
-        description:
-          "An infinity canvas that curates X posts for design inspiration and presents them in a clean, focused experience.",
-        techStack: ["React", "Convex", "Tailwind CSS", "Framer Motion"],
-      },
-      {
-        name: "Klaude UI",
-        description:
-          "A frontend-first UI library for shadcn components, built with motion.",
-        techStack: ["React", "shadcn/ui", "motion", "Tailwind CSS"],
-        liveUrl: "https://klaude.co",
-      },
-    ],
-  },
-  {
-    label: "Projects",
-    items: [
-      {
-        name: "Jeiwinfrey",
-        description:
-          "My personal portfolio website, designed to showcase my work, stack, and background in a clean way.",
-        techStack: ["Next.js", "Tailwind CSS", "MDX"],
-        githubUrl: "https://github.com/jeiwinfrey/portfolio",
-      },
-      {
-        name: "chatcn-cli",
-        description:
-          "A CLI tool to scaffold and manage chat UI components built on shadcn.",
-        techStack: ["Node.js", "TypeScript", "Commander.js"],
-        githubUrl: "https://github.com/jeiwinfrey/chatcn-cli",
-        liveUrl: "https://npmjs.com/package/chatcn-cli",
-      },
-      {
-        name: "smooth-div",
-        description:
-          "An open-source web component for squircle-style corner smoothing, published to npm.",
-        liveUrl: "https://smooth-div.vercel.app",
-        githubUrl: "https://github.com/jeiwinfrey/smooth-div",
-        techStack: ["TypeScript", "Lit", "Web Components"],
-      },
-    ],
-  },
-]
+import Link from "next/link"
+import { useState } from "react"
+import { AnimatePresence, motion } from "motion/react"
+import { springTransition } from "@/lib/animations"
+import { works, workAssetBaseUrl, type WorkItem } from "@/lib/works"
 
 function WorkRow({
   item,
-  onSelect,
+  onHoverStart,
+  onHoverEnd,
+  onPointerMove,
 }: {
   item: WorkItem
-  onSelect: (item: WorkItem) => void
+  onHoverStart: (item: WorkItem) => void
+  onHoverEnd: () => void
+  onPointerMove: (event: React.PointerEvent<HTMLDivElement>) => void
 }) {
   return (
-    <motion.button
-      type="button"
-      onClick={() => onSelect(item)}
-      className="relative flex w-full cursor-pointer items-center rounded-2xl px-4 py-2 text-left transition-colors outline-none hover:bg-muted/90"
-      whileHover={{ x: 15, scale: 1.02 }}
-      whileTap={{ scale: 0.985 }}
-      transition={workRowTransition}
+    <motion.div
+      className="border-b border-border/50 py-4 last:border-b-0"
+      whileHover={{ x: 8 }}
+      transition={springTransition}
+      onHoverStart={() => onHoverStart(item)}
+      onHoverEnd={onHoverEnd}
+      onPointerMove={onPointerMove}
     >
-      <div className="flex min-w-0 flex-1 flex-col gap-0.5">
-        <p className="relative z-10 leading-snug font-medium">{item.name}</p>
-        <p className="relative z-10 leading-snug text-pretty text-muted-foreground">
-          {item.description}
-        </p>
-      </div>
-    </motion.button>
+      <Link
+        href={`/works/${item.slug}`}
+        className="flex flex-col gap-1 outline-none"
+        aria-label={`Open ${item.name}`}
+      >
+        <div className="flex min-w-0 flex-1 flex-col gap-1">
+          <p className="leading-snug font-medium">{item.name}</p>
+          <p className="leading-snug text-pretty text-muted-foreground">
+            {item.description}
+          </p>
+        </div>
+      </Link>
+    </motion.div>
   )
 }
 
-function WorkSection({
-  label,
-  items,
-  onSelect,
-}: WorkSection & {
-  onSelect: (item: WorkItem) => void
-}) {
-  return (
-    <section className="flex flex-col gap-0.5">
-      <p className="text-md font-medium text-muted-foreground">{label}</p>
-      <div className="flex flex-col gap-1">
-        {items.map((item) => (
-          <WorkRow key={item.name} item={item} onSelect={onSelect} />
-        ))}
-      </div>
-    </section>
-  )
-}
+export default function Works() {
+  const [activeItem, setActiveItem] = useState<WorkItem | null>(null)
+  const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 })
 
-export default function Works({
-  onSelect,
-}: {
-  onSelect: (item: WorkItem) => void
-}) {
+  const previewIsVideo = activeItem
+    ? activeItem.asset.endsWith(".mp4") ||
+      activeItem.asset.endsWith(".webm") ||
+      activeItem.asset.endsWith(".mov")
+    : false
+
   return (
     <div>
       <section id="projects" className="pt-12">
@@ -125,15 +63,61 @@ export default function Works({
             </p>
           </div>
 
-          <div className="flex flex-col gap-6">
-            {workSections.map((section) => (
-              <WorkSection
-                key={section.label}
-                label={section.label}
-                items={section.items}
-                onSelect={onSelect}
+          <div className="relative">
+            <AnimatePresence>
+              {activeItem ? (
+                <motion.div
+                  key={activeItem.slug}
+                  initial={{ opacity: 0, scale: 0.96 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.96 }}
+                  transition={{ duration: 0.16, ease: "easeOut" }}
+                  className="pointer-events-none fixed left-0 top-0 z-50 hidden w-[min(26rem,42vw)] rounded-[32px] border border-border/60 bg-muted/60 p-1 shadow-[0_24px_80px_rgba(0,0,0,0.12)] backdrop-blur-sm md:block"
+                  style={{
+                    x: cursorPosition.x + 20,
+                    y: cursorPosition.y - 260,
+                  }}
+                >
+                  <div className="overflow-hidden rounded-[28px] border border-border/50 bg-background/90">
+                    {previewIsVideo ? (
+                      <video
+                        className="block h-auto w-full"
+                        src={`${workAssetBaseUrl}/${activeItem.asset}`}
+                        autoPlay
+                        muted
+                        loop
+                        playsInline
+                        controls={false}
+                        preload="metadata"
+                      />
+                    ) : (
+                      <img
+                        className="block h-auto w-full"
+                        src={`${workAssetBaseUrl}/${activeItem.asset}`}
+                        alt={activeItem.name}
+                      />
+                    )}
+                  </div>
+                </motion.div>
+              ) : null}
+            </AnimatePresence>
+
+            <div className="flex flex-col">
+            {works.map((item) => (
+              <WorkRow
+                key={item.slug}
+                item={item}
+                onHoverStart={setActiveItem}
+                onHoverEnd={() => setActiveItem(null)}
+                onPointerMove={(event) =>
+                  setCursorPosition({
+                    x: event.clientX,
+                    y: event.clientY,
+                  })
+                }
               />
             ))}
+            </div>
           </div>
         </div>
       </section>
