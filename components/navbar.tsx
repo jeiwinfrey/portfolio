@@ -1,7 +1,9 @@
 "use client";
 
+import Link from "next/link";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { IconCloud } from "@central-icons-react/round-filled-radius-3-stroke-1.5/IconCloud";
+import { IconArrowShareLeft } from "@central-icons-react/round-filled-radius-3-stroke-1.5/IconArrowShareLeft";
 import { useTheme } from "next-themes";
 import { IconMoon } from "@central-icons-react/round-filled-radius-3-stroke-1.5/IconMoon";
 import { IconSun } from "@central-icons-react/round-filled-radius-3-stroke-1.5/IconSun";
@@ -28,6 +30,7 @@ export default function Navbar() {
   const [mounted, setMounted] = useState(false);
 
   const active = pathname === "/gallery" ? "/gallery" : "/";
+  const isWorkPage = pathname.startsWith("/works");
   const reduceMotion = useReducedMotion();
   const isDark = resolvedTheme === "dark";
 
@@ -38,9 +41,28 @@ export default function Navbar() {
   return (
     <nav className="top-0 inset-x-0 z-40 pt-4">
       <div className="mx-auto flex max-w-2xl items-center justify-between">
-        <div className="flex size-11 items-center justify-center rounded-full bg-muted/90 text-muted-foreground backdrop-blur-sm">
-          <IconCloud className="size-5" />
-        </div>
+        <Link
+          href="/"
+          aria-label={isWorkPage ? "Back to home" : "Go to home"}
+          className="flex size-11 items-center justify-center rounded-full bg-muted/90 text-muted-foreground backdrop-blur-sm transition-colors hover:bg-muted/90 hover:text-muted-foreground"
+        >
+          <AnimatePresence mode="wait" initial={false}>
+            <motion.span
+              key={isWorkPage ? "work" : "home"}
+              initial={reduceMotion ? false : { opacity: 0, rotate: -16, scale: 0.8 }}
+              animate={{ opacity: 1, rotate: 0, scale: 1 }}
+              exit={reduceMotion ? { opacity: 0 } : { opacity: 0, rotate: 16, scale: 0.8 }}
+              transition={reduceMotion ? reducedMotionTransition : navTransition}
+              className="relative z-10 flex items-center justify-center"
+            >
+              {isWorkPage ? (
+                <IconArrowShareLeft className="size-5" />
+              ) : (
+                <IconCloud className="size-5" />
+              )}
+            </motion.span>
+          </AnimatePresence>
+        </Link>
 
         <div className="flex items-center gap-2">
           <Button
