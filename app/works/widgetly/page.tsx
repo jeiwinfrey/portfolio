@@ -1,39 +1,14 @@
 import type { Metadata } from "next"
-import { workAssetBaseUrl } from "@/lib/works"
+import WorkPageContent from "@/components/work-page-content"
+import { getWorkBySlug } from "@/lib/works"
+
+const work = getWorkBySlug("widgetly")
 
 export const metadata: Metadata = {
-  title: "Widgetly",
-  description:
-    "A simple, visual link-in-bio page for sharing links, projects, and socials in one place.",
+  description: work?.description,
 }
 
 export default function WidgetlyPage() {
-  return (
-    <div className="mx-auto max-w-4xl px-4 py-12 sm:px-6 lg:px-8">
-      <article className="flex flex-col gap-6">
-        <div className="overflow-hidden rounded-3xl border border-border/50 bg-muted/20">
-          <video
-            className="block h-auto w-full"
-            src={`${workAssetBaseUrl}/widgets.mp4`}
-            autoPlay
-            muted
-            loop
-            playsInline
-            controls={false}
-            preload="metadata"
-          />
-        </div>
-
-        <div className="flex flex-col gap-2">
-          <h1 className="text-3xl font-medium tracking-tight sm:text-4xl">
-            Widgetly
-          </h1>
-          <p className="max-w-2xl text-base leading-relaxed text-muted-foreground">
-            A simple, visual link-in-bio page for sharing links, projects, and
-            socials in one place.
-          </p>
-        </div>
-      </article>
-    </div>
-  )
+  if (!work) return null
+  return <WorkPageContent item={work} />
 }
