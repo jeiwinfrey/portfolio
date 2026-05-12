@@ -9,19 +9,13 @@ import { IconMoon } from "@central-icons-react/round-filled-radius-3-stroke-1.5/
 import { IconSun } from "@central-icons-react/round-filled-radius-3-stroke-1.5/IconSun";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { springTransition, reducedMotionTransition } from "@/lib/animations";
+import { navTransition, reducedMotionTransition } from "@/lib/animations";
 import { Button } from "@/components/ui/button";
 
 const tabs = [
   { label: "Home", href: "/" },
   { label: "Gallery", href: "/gallery" },
 ];
-
-const navTransition = {
-  type: "spring",
-  stiffness: 340,
-  damping: 28,
-} as const;
 
 export default function Navbar() {
   const pathname = usePathname();

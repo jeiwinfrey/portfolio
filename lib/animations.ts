@@ -10,6 +10,12 @@ export const workRowTransition = {
   damping: 30,
 } as const
 
+export const navTransition = {
+  type: "spring",
+  stiffness: 340,
+  damping: 28,
+} as const
+
 export const pageTransitionVariants = {
   initial: { opacity: 0, y: 8 },
   animate: { opacity: 1, y: 0 },
