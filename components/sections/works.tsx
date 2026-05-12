@@ -4,7 +4,11 @@ import Link from "next/link"
 import { useState } from "react"
 import { AnimatePresence, motion } from "motion/react"
 import { workRowTransition } from "@/lib/animations"
-import { works, workAssetBaseUrl, type WorkItem } from "@/lib/works"
+import {
+  works,
+  workPreviewAssetBaseUrl,
+  type WorkItem,
+} from "@/lib/works"
 
 function WorkRow({
   item,
@@ -48,9 +52,9 @@ export default function Works() {
   const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 })
 
   const previewIsVideo = activeItem
-    ? activeItem.asset.endsWith(".mp4") ||
-      activeItem.asset.endsWith(".webm") ||
-      activeItem.asset.endsWith(".mov")
+    ? activeItem.previewAsset.endsWith(".mp4") ||
+      activeItem.previewAsset.endsWith(".webm") ||
+      activeItem.previewAsset.endsWith(".mov")
     : false
 
   return (
@@ -83,7 +87,7 @@ export default function Works() {
                     {previewIsVideo ? (
                       <video
                         className="block h-auto w-full"
-                        src={`${workAssetBaseUrl}/${activeItem.asset}`}
+                        src={`${activeItem.previewAssetBaseUrl ?? workPreviewAssetBaseUrl}/${activeItem.previewAsset}`}
                         autoPlay
                         muted
                         loop
@@ -94,7 +98,7 @@ export default function Works() {
                     ) : (
                       <img
                         className="block h-auto w-full"
-                        src={`${workAssetBaseUrl}/${activeItem.asset}`}
+                        src={`${activeItem.previewAssetBaseUrl ?? workPreviewAssetBaseUrl}/${activeItem.previewAsset}`}
                         alt={activeItem.name}
                       />
                     )}
